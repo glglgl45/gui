@@ -180,9 +180,5 @@ public class MemberTable extends JFrame {
 			Object[] objList = {vo.getNo(),vo.getName(),vo.getAge(),vo.getGender()};
 			model.addRow(objList);
 		}
-		
-//		System.out.println(vecList.toArray());
-		
 	}
-
 }
