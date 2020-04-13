@@ -31,6 +31,7 @@ public class MemberTable extends JFrame implements ActionListener {
 	private JTextField txtAge;
 	private JTextField txtGender;
 	private JTextField txtSearch;
+	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTable table;
@@ -38,9 +39,7 @@ public class MemberTable extends JFrame implements ActionListener {
 	private JTable table_1;
 	
 	private MemberDAO dao;
-	// 전체 조회
 	private DefaultTableModel model;
-	// 개별 조회
 	private DefaultTableModel model1;
 
 	public static void main(String[] args) {
@@ -106,19 +105,15 @@ public class MemberTable extends JFrame implements ActionListener {
 		JLabel lblNewLabel_3 = new JLabel("회원번호");
 		panel_4.add(lblNewLabel_3);
 		
-		txtSearch = new JTextField();
-		panel_4.add(txtSearch);
-		txtSearch.setColumns(10);
+		textField = new JTextField();
+		panel_4.add(textField);
+		textField.setColumns(10);
 		
 		JButton btnNewButton = new JButton("조회");
 		panel_4.add(btnNewButton);
-		btnNewButton.addActionListener(this);
 		
-		model1 = getModel();
-		table = new JTable(model1);
-		JScrollPane scrollPane1 = new JScrollPane();
-		scrollPane1.setViewportView(table);
-		panel_1.add(scrollPane1, BorderLayout.CENTER);
+		table = new JTable();
+		panel_1.add(table, BorderLayout.CENTER);
 		
 		JPanel panel_2 = new JPanel();
 		tabbedPane.addTab("회원수정", null, panel_2, null);
@@ -169,16 +164,6 @@ public class MemberTable extends JFrame implements ActionListener {
 		JScrollPane scrollPane = new JScrollPane();
 		panel_6.add(scrollPane, BorderLayout.CENTER);
 		
-		
-		table_1 = new JTable(getModel());
-		list();
-		scrollPane.setViewportView(table_1);
-		
-		// 회원등록 화면의 성별 
-		txtGender.addActionListener(this);
-	}
-	
-	public DefaultTableModel getModel() {
 		// memberTBL의 전체 내용 가져오기
 		String columnNames[] = {"번호","이름","나이","성별"};
 		model = new DefaultTableModel(columnNames,0) {
@@ -187,7 +172,10 @@ public class MemberTable extends JFrame implements ActionListener {
 				return false;
 			}
 		};
-		return model;
+		
+		table_1 = new JTable(model);
+		list();
+		scrollPane.setViewportView(table_1);
 	}
 	
 	public void list() {
@@ -199,7 +187,6 @@ public class MemberTable extends JFrame implements ActionListener {
 			model.addRow(objList);
 		}
 	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
@@ -242,6 +229,10 @@ public class MemberTable extends JFrame implements ActionListener {
 			} else {	// 실패
 				JOptionPane.showMessageDialog(this, "삭제 실패");
 			}
+		} else if (e.getActionCommand().equals("수정")) {
+			
+		} else if (e.getActionCommand().equals("조회2")) {
+			
 		}
 	}
 }
